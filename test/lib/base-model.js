@@ -61,7 +61,7 @@ lab.experiment('BaseModel Validation', function () {
 
 lab.experiment('BaseModel Proxied Methods', function () {
 
-	var SubModel, liveTestData;
+		var SubModel, liveTestData;
 
 
     lab.before(function (done) {
@@ -88,6 +88,7 @@ lab.experiment('BaseModel Proxied Methods', function () {
 
         done();
     });
+
 
 		lab.test('should insert data and return the results', function (done) {
 
@@ -193,6 +194,19 @@ lab.experiment('BaseModel Proxied Methods', function () {
 
             Code.expect(err).to.not.exist();
             Code.expect(result).to.be.a.number();
+
+            done();
+        });
+    });
+
+
+    lab.test('should remove documents via query', function (done) {
+
+        SubModel.remove(liveTestData[0].id, function (err, result) {
+
+            Code.expect(err).to.not.exist();
+            Code.expect(result).to.be.an.object();
+            Code.expect(result.success).to.equal(true);
 
             done();
         });
