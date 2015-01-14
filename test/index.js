@@ -36,7 +36,7 @@ lab.experiment('Plugin', function () {
         });
     });
 
-		lab.test('should successfuly connect to the api and exposes the base model', function (done) {
+	lab.test('should successfuly connect to the api and exposes the base model', function (done) {
 
         var server = new Hapi.Server();
         var Plugin = {
@@ -60,7 +60,7 @@ lab.experiment('Plugin', function () {
         });
     });
 
-		lab.test('should successfuly connect to the api and expose defined models', function (done) {
+	lab.test('should successfuly connect to the api and expose defined models', function (done) {
 
         var server = new Hapi.Server();
         var Plugin = {
