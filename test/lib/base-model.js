@@ -148,10 +148,10 @@ lab.experiment('BaseModel Proxied Methods', function () {
 
     lab.test('should update a document and return the results', function (done) {
 
-				
+
 				SubModel.findOne({Id: liveTestData[0].Id}, function (err, result) {
 
-						var res = result;	
+						var res = result;
 						var remove = [ 'LastModifiedDate',
 								'LastCURequestDate',
 								'LastCUUpdateDate',
@@ -177,7 +177,7 @@ lab.experiment('BaseModel Proxied Methods', function () {
 
 						res.LastName = 'Chan';
 						SubModel.update(res, function (err, updated) {
-			
+
 							Code.expect(err).to.not.exist();
 							Code.expect(updated).to.be.an.object();
 							Code.expect(updated.success).to.equal(true);
