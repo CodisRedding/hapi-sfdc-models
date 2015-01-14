@@ -1,9 +1,9 @@
 module.exports = {
     salesforce: {
-        url: 'https://test.salesforce.com',
+        url: 'https://login.salesforce.com',
         auth: {
-						user: '<user>',
-						pass: '<pass><token>'
+						user: 'salesforce.otr@gmail.com',
+						pass: 'sfdc12345w6YIUwOWrRSnob4nBdDd4Lmma'
 				}
     }
 };
