@@ -10,6 +10,8 @@ Salesforce object models for hapi applications.
 This is heavily inspired by [Hapi's](https://github.com/hapijs/hapi/) [hapi-mongo-models](https://raw.githubusercontent.com/jedireza/hapi-mongo-models/)
 plugin.
 
+Thanks @jedireza
+
 ## Install
 
 ## Usage
