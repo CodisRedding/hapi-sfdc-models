@@ -61,7 +61,7 @@ lab.experiment('BaseModel Validation', function () {
 
 lab.experiment('BaseModel Proxied Methods', function () {
 
-	var SubModel, liveTestData;
+    var SubModel, liveTestData;
 
 
     lab.before(function (done) {
@@ -124,7 +124,7 @@ lab.experiment('BaseModel Proxied Methods', function () {
 
 	lab.test('should return a single result', function (done) {
 
-        SubModel.findOne({LastName: 'Ren'}, function (err, result) {
+        SubModel.findOne({Name: 'Ren'}, function (err, result) {
 
             Code.expect(err).to.not.exist();
             Code.expect(result).to.be.an.object();
@@ -148,44 +148,44 @@ lab.experiment('BaseModel Proxied Methods', function () {
 
     lab.test('should update a document and return the results', function (done) {
 
-		SubModel.findOne({Id: liveTestData[0].Id}, function (err, result) {
+        SubModel.findOne({Id: liveTestData[0].Id}, function (err, result) {
 
-			var res = result;
-			var remove = [
-					'LastModifiedDate',
-					'LastCURequestDate',
-					'LastCUUpdateDate',
-					'MailingAddress',
-					'LastViewedDate',
-					'CreatedById',
-					'IsDeleted',
-					'OtherAddress',
-					'LastActivityDate',
-					'SystemModstamp',
-					'PhotoUrl',
-					'IsEmailBounced',
-					'LastReferencedDate',
-					'LastModifiedById',
-					'MasterRecordId',
-					'Name',
-					'JigsawContactId',
-					'CreatedDate'
-				];
+            var res = result;
+            var remove = [
+                'LastModifiedDate',
+                'LastCURequestDate',
+                'LastCUUpdateDate',
+                'MailingAddress',
+                'LastViewedDate',
+                'CreatedById',
+                'IsDeleted',
+                'OtherAddress',
+                'LastActivityDate',
+                'SystemModstamp',
+                'PhotoUrl',
+                'IsEmailBounced',
+                'LastReferencedDate',
+                'LastModifiedById',
+                'MasterRecordId',
+                'Name',
+                'JigsawContactId',
+                'CreatedDate'
+            ];
 
-			remove.map(function (index) {
-				delete res[index];
-			});
+            remove.map(function (index) {
+                delete res[index];
+            });
 
-			res.LastName = 'Chan';
-			SubModel.update(res, function (err, updated) {
+            res.LastName = 'Chan';
+            SubModel.update(res, function (err, updated) {
 
-				Code.expect(err).to.not.exist();
-				Code.expect(updated).to.be.an.object();
-				Code.expect(updated.success).to.equal(true);
+                Code.expect(err).to.not.exist();
+                Code.expect(updated).to.be.an.object();
+                Code.expect(updated.success).to.equal(true);
 
-				done(err);
-			});
-		});
+                done(err);
+            });
+        });
     });
 
 

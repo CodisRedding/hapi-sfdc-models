@@ -18,25 +18,27 @@ lab.experiment('Plugin', function () {
 
     lab.test('should return and error when the api connection fails', function (done) {
 
-        var realConnect = stub.BaseModel.connect;
-        stub.BaseModel.connect = function (config, callback) {
-
-            callback(Error('connect failed'));
-        };
+        var realUser = Config.salesforce.auth.user;
+        Config.salesforce.auth.user = '';
 
         var server = new Hapi.Server();
+        var Plugin = {
+            register: ModelsPlugin,
+            options: Config
+        };
+
         server.connection({ port: 0 });
-        server.register(ModelsPlugin, function (err) {
+        server.register(Plugin, function (err) {
 
             Code.expect(err).to.be.an.object();
 
-            stub.BaseModel.connect = realConnect;
+            Config.salesforce.auth.user = realUser;
 
             done();
         });
     });
 
-	lab.test('should successfuly connect to the api and exposes the base model', function (done) {
+    lab.test('should successfuly connect to the api and exposes the base model', function (done) {
 
         var server = new Hapi.Server();
         var Plugin = {
@@ -60,7 +62,7 @@ lab.experiment('Plugin', function () {
         });
     });
 
-	lab.test('should successfuly connect to the api and expose defined models', function (done) {
+    lab.test('should successfuly connect to the api and expose defined models', function (done) {
 
         var server = new Hapi.Server();
         var Plugin = {
