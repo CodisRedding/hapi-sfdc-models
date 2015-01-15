@@ -12,12 +12,33 @@ Salesforce object models for hapi applications.
 This is heavily inspired by [Hapi's](https://github.com/hapijs/hapi/) [hapi-mongo-models](https://github.com/jedireza/hapi-mongo-models/)
 plugin.
 
-Thanks @jedireza
+Thanks [@jedireza](https://github.com/jedireza/)
+
+This plugin provides Salesforce crud methods for applications using [Hapi](https://github.com/hapijs/hapi/).
 
 ## Install
 
+```javascript
 npm install --save hapi-sfdc-models
+```
 
 ## Usage
 
 ## Examples
+
+## API
+
+#### `insert(input, callback)`
+
+Insert records
+
+ * `input` - `{Record|Array.<Record>} records - A record or array of records to create`
+ * `callback` - `{Callback.<RecordResult|Array.<RecordResult>>} [function(err, response)]`
+  * `return` - `{Promise.<RecordResult|Array.<RecordResult>>}`
+
+#### `find(input, callback)`
+#### `findOne(input, callback)`
+#### `findById()`
+#### `update()`
+#### `count()`
+#### `remove()`
