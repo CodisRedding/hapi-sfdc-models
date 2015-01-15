@@ -16,6 +16,8 @@ Thanks @jedireza
 
 ## Install
 
+npm install --save hapi-sfdc-models
+
 ## Usage
 
 ## Examples
