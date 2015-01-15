@@ -4,7 +4,7 @@
   "description": "Salesforce object models for hapi applications",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/lab/bin/lab -c -L -r lcov | ./node_modules/.bin/coveralls"
+    "test": "./node_modules/lab/bin/lab -c -L & ./node_modules/lab/bin/lab -r lcov | ./node_modules/.bin/coveralls"
   },
   "repository": {
     "type": "git",
