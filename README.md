@@ -22,6 +22,7 @@ This plugin provides Salesforce crud methods for applications using [Hapi](https
 npm install --save hapi-sfdc-models
 ```
 
+---- WORK IN PROGRESS ----
 ## Usage
 
 ## Examples
