@@ -137,7 +137,7 @@ lab.experiment('BaseModel Paged Find', function () {
         var fields;
         var limit = 10;
         var page = 1;
-        var sort = { Id: -1 };
+        var sort = { id: -1 };
 
         SubModel.pagedFind(query, fields, sort, limit, page, function (err, results) {
 
@@ -166,7 +166,7 @@ lab.experiment('BaseModel Paged Find', function () {
             var fields;
             var limit = 10;
             var page = 1;
-            var sort = { Id: -1 };
+            var sort = { id: -1 };
 
             SubModel.pagedFind(query, fields, sort, limit, page, function (err, results) {
 
@@ -194,7 +194,7 @@ lab.experiment('BaseModel Paged Find', function () {
             var fields;
             var limit = 2;
             var page = 1;
-            var sort = { Id: -1 };
+            var sort = { id: -1 };
 
             SubModel.pagedFind(query, fields, sort, limit, page, function (err, results) {
 
@@ -226,7 +226,7 @@ lab.experiment('BaseModel Paged Find', function () {
             var fields;
             var limit = 2;
             var page = 1;
-            var sort = { Id: -1 };
+            var sort = { id: -1 };
 
             SubModel.pagedFind(query, fields, sort, limit, page, function (err, results) {
 
@@ -271,7 +271,7 @@ lab.experiment('BaseModel Proxied Methods', function () {
     });
 
 
-	lab.test('should insert data and return the results', function (done) {
+    lab.test('should insert data and return the results', function (done) {
 
         var testData = [
             {LastName: 'Ren'},
@@ -303,7 +303,7 @@ lab.experiment('BaseModel Proxied Methods', function () {
     });
 
 
-	lab.test('should return a single result', function (done) {
+    lab.test('should return a single result', function (done) {
 
         SubModel.findOne({Name: 'Ren'}, function (err, result) {
 
@@ -317,7 +317,7 @@ lab.experiment('BaseModel Proxied Methods', function () {
 
     lab.test('should return a single result via id', function (done) {
 
-        SubModel.findById(liveTestData[0].Id, function (err, result) {
+        SubModel.findById(liveTestData[0].id, function (err, result) {
 
             Code.expect(err).to.not.exist();
             Code.expect(result).to.be.an.object();
