@@ -137,7 +137,7 @@ lab.experiment('BaseModel Paged Find', function () {
         var fields;
         var limit = 10;
         var page = 1;
-        var sort = { id: -1 };
+        var sort = { Id: -1 };
 
         SubModel.pagedFind(query, fields, sort, limit, page, function (err, results) {
 
@@ -162,11 +162,11 @@ lab.experiment('BaseModel Paged Find', function () {
             }
         }, function (err, results) {
 
-            var query = {};
+            var query = { name: { $all: [ 'Ren', 'Stimpy', 'Yak' ] } };
             var fields;
             var limit = 10;
             var page = 1;
-            var sort = { id: -1 };
+            var sort = { Id: -1 };
 
             SubModel.pagedFind(query, fields, sort, limit, page, function (err, results) {
 
@@ -190,11 +190,11 @@ lab.experiment('BaseModel Paged Find', function () {
             }
         }, function (err, results) {
 
-            var query = {};
+            var query = { name: { $all: [ 'Ren', 'Stimpy', 'Yak' ] } };
             var fields;
             var limit = 2;
             var page = 1;
-            var sort = { id: -1 };
+            var sort = { Id: -1 };
 
             SubModel.pagedFind(query, fields, sort, limit, page, function (err, results) {
 
@@ -226,7 +226,7 @@ lab.experiment('BaseModel Paged Find', function () {
             var fields;
             var limit = 2;
             var page = 1;
-            var sort = { id: -1 };
+            var sort = { Id: -1 };
 
             SubModel.pagedFind(query, fields, sort, limit, page, function (err, results) {
 
