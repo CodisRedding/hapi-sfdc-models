@@ -1,6 +1,6 @@
 {
   "name": "hapi-sfdc-models",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Salesforce object models for hapi applications",
   "main": "index.js",
   "scripts": {
