@@ -305,11 +305,42 @@ lab.experiment('BaseModel Proxied Methods', function () {
 
     lab.test('should return a single result', function (done) {
 
-        SubModel.findOne({Name: 'Ren'}, function (err, result) {
+
+        SubModel._sobject = 'Account';
+        var query = {
+            '$and': [
+                { 'RecordType.Name': 'penis' },
+                { 'Name': 'Acme' }
+            ]
+        };
+
+        SubModel.findOne(query, function (err, result) {
 
             Code.expect(err).to.not.exist();
             Code.expect(result).to.be.an.object();
 
+            SubModel._sobject = 'Contact';
+            done();
+        });
+    });
+
+
+    lab.test('should fail due to jsforce bug, both err, and result should be null', function (done) {
+
+        SubModel._sobject = 'Account';
+        var query = {
+            '$and': [
+                { 'RecordType.Name': 'nopenis' },
+                { 'Name': 'Acme' }
+            ]
+        };
+
+        SubModel.findOne(query, function (err, result) {
+
+            Code.expect(err).to.not.exist();
+            Code.expect(result).to.not.exist();
+
+            SubModel._sobject = 'Contact';
             done();
         });
     });
@@ -329,7 +360,7 @@ lab.experiment('BaseModel Proxied Methods', function () {
 
     lab.test('should update a document and return the results', function (done) {
 
-        SubModel.findOne({Id: liveTestData[0].Id}, function (err, result) {
+        SubModel.findOne({Id: liveTestData[0].id}, function (err, result) {
 
             var res = result;
             var remove = [
