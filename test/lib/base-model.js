@@ -59,6 +59,187 @@ lab.experiment('BaseModel Validation', function () {
 });
 
 
+lab.experiment('BaseModel Helpers', function () {
+
+    lab.test('it returns expected results for the fields adapter', function (done) {
+
+        var fieldsDoc = BaseModel.fieldsAdapter('one two three');
+        Code.expect(fieldsDoc).to.be.an.object();
+        Code.expect(fieldsDoc.one).to.equal(true);
+        Code.expect(fieldsDoc.two).to.equal(true);
+        Code.expect(fieldsDoc.three).to.equal(true);
+
+        var fieldsDoc2 = BaseModel.fieldsAdapter('');
+        Code.expect(Object.keys(fieldsDoc2)).to.have.length(0);
+
+        done();
+    });
+
+
+    lab.test('it returns expected results for the sort adapter', function (done) {
+
+        var sortDoc = BaseModel.sortAdapter('one -two three');
+        Code.expect(sortDoc).to.be.an.object();
+        Code.expect(sortDoc.one).to.equal(1);
+        Code.expect(sortDoc.two).to.equal(-1);
+        Code.expect(sortDoc.three).to.equal(1);
+
+        var sortDoc2 = BaseModel.sortAdapter('');
+        Code.expect(Object.keys(sortDoc2)).to.have.length(0);
+
+        done();
+    });
+});
+
+
+lab.experiment('BaseModel Paged Find', function () {
+
+    var SubModel;
+
+
+    lab.beforeEach(function (done) {
+
+        SubModel = BaseModel.extend({
+            constructor: function (attrs) {
+
+                ObjectAssign(this, attrs);
+            }
+        });
+
+        SubModel._sobject = 'Contact';
+
+        BaseModel.connect(Config.salesforce, function (err, db) {
+
+            done(err);
+        });
+    });
+
+
+    lab.afterEach(function (done) {
+
+        SubModel.remove({}, function (err, result) {
+
+            BaseModel.disconnect();
+
+            done();
+        });
+    });
+
+
+    lab.test('it returns early when an error occurs', function (done) {
+
+        var realCount = SubModel.count;
+        SubModel.count = function (query, callback) {
+            callback(Error('count failed'));
+        };
+
+        var query = {};
+        var fields;
+        var limit = 10;
+        var page = 1;
+        var sort = { id: -1 };
+
+        SubModel.pagedFind(query, fields, sort, limit, page, function (err, results) {
+
+            Code.expect(err).to.be.an.object();
+            Code.expect(results).to.not.exist();
+
+            SubModel.count = realCount;
+
+            done();
+        });
+    });
+
+
+    lab.test('it returns paged results', function (done) {
+
+        Async.auto({
+            setup: function (cb) {
+
+                var testData = [{name: 'Ren'}, {name: 'Stimpy'}, {name: 'Yak'}];
+
+                SubModel.insert(testData, cb);
+            }
+        }, function (err, results) {
+
+            var query = {};
+            var fields;
+            var limit = 10;
+            var page = 1;
+            var sort = { id: -1 };
+
+            SubModel.pagedFind(query, fields, sort, limit, page, function (err, results) {
+
+                Code.expect(err).to.not.exist();
+                Code.expect(results).to.be.an.object();
+
+                done();
+            });
+        });
+    });
+
+
+    lab.test('it returns paged results where end item is less than total', function (done) {
+
+        Async.auto({
+            setup: function (cb) {
+
+                var testData = [{name: 'Ren'}, {name: 'Stimpy'}, {name: 'Yak'}];
+
+                SubModel.insert(testData, cb);
+            }
+        }, function (err, results) {
+
+            var query = {};
+            var fields;
+            var limit = 2;
+            var page = 1;
+            var sort = { id: -1 };
+
+            SubModel.pagedFind(query, fields, sort, limit, page, function (err, results) {
+
+                Code.expect(err).to.not.exist();
+                Code.expect(results).to.be.an.object();
+
+                done();
+            });
+        });
+    });
+
+
+    lab.test('it returns paged results where begin item is less than total', function (done) {
+
+        Async.auto({
+            setup: function (cb) {
+
+                var testData = [
+                    {name: 'Ren'},
+                    {name: 'Stimpy'},
+                    {name: 'Yak'}
+                ];
+
+                SubModel.insert(testData, cb);
+            }
+        }, function (err, results) {
+
+            var query = { name: { $all: [ 'Ren', 'Stimpy', 'Yak' ] } };
+            var fields;
+            var limit = 2;
+            var page = 1;
+            var sort = { id: -1 };
+
+            SubModel.pagedFind(query, fields, sort, limit, page, function (err, results) {
+
+                Code.expect(err).to.not.exist();
+                Code.expect(results).to.be.an.object();
+
+                done();
+            });
+        });
+    });
+});
+
+
 lab.experiment('BaseModel Proxied Methods', function () {
 
     var SubModel, liveTestData;
