@@ -256,6 +256,12 @@ lab.experiment('BaseModel Proxied Methods', function () {
 
         SubModel._sobject = 'Contact';
 
+        SubModel.schema = Joi.object().keys({
+            Id: Joi.string().min(15).max(18).required(),
+            Name: Joi.string().required(),
+            LastName: Joi.string().required()
+        });
+
         BaseModel.connect(Config.salesforce, function (err, api) {
 
             done(err);
