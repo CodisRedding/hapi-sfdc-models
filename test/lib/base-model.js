@@ -258,7 +258,6 @@ lab.experiment('BaseModel Proxied Methods', function () {
 
         SubModel.schema = Joi.object().keys({
             Id: Joi.string().min(15).max(18).required(),
-            Name: Joi.string().required(),
             LastName: Joi.string().required()
         });
 
@@ -327,6 +326,21 @@ lab.experiment('BaseModel Proxied Methods', function () {
 
             Code.expect(err).to.not.exist();
             Code.expect(result).to.be.an.object();
+
+            done();
+        });
+    });
+
+
+    lab.test('it updates a single object via id', function (done) {
+
+        var update = {LastName: 'New lastName'};
+
+        SubModel.findByIdAndUpdate(liveTestData[0].id, update, function (err, result) {
+
+            Code.expect(err).to.not.exist();
+            Code.expect(result).to.be.an.object();
+            Code.expect(result.success).to.equal(true);
 
             done();
         });
