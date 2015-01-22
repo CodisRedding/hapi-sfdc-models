@@ -2,6 +2,7 @@
 
 Salesforce object models for hapi applications.
 
+[![bitHound Score](https://app.bithound.io/fourq/hapi-sfdc-models/badges/score.svg)](http://app.bithound.io/fourq/hapi-sfdc-models)
 [![Build Status](https://travis-ci.org/fourq/hapi-sfdc-models.svg)](https://travis-ci.org/fourq/hapi-sfdc-models)
 [![Coverage Status](https://coveralls.io/repos/fourq/hapi-sfdc-models/badge.svg?branch=master)](https://coveralls.io/r/fourq/hapi-sfdc-models?branch=master)
 
