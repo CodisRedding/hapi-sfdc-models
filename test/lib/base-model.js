@@ -310,7 +310,7 @@ lab.experiment('BaseModel Proxied Methods', function () {
 
     lab.test('should return a single result', function (done) {
 
-        SubModel.findOne({Name: 'Ren'}, function (err, result) {
+        SubModel.findOne({LastName: 'Ren'}, function (err, result) {
 
             Code.expect(err).to.not.exist();
             Code.expect(result).to.be.an.object();
@@ -334,7 +334,9 @@ lab.experiment('BaseModel Proxied Methods', function () {
 
     lab.test('it updates a single object via id', function (done) {
 
-        var update = {LastName: 'New lastName'};
+        var update = {
+            'LastName': 'New LastName'
+        };
 
         SubModel.findByIdAndUpdate(liveTestData[0].id, update, function (err, result) {
 
